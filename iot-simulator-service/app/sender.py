@@ -19,10 +19,11 @@ async def send_bin_update(client: httpx.AsyncClient, bin: Bin) -> None:
         latitude=bin.latitude,
         longitude=bin.longitude,
         fill_level=bin.fill_level,
+        fill_rate= bin.fill_rate,
         timestamp=bin.last_updated.isoformat(),
     )
-    url = f"{settings.BACKEND_URL}/api/bin-update"
-
+    # url = f"{settings.BACKEND_URL}/api/bin-update"
+    url = "https://urban-cortex-ai.onrender.com/api/v1/bins/update-from-iot"
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             response = await client.post(url, json=payload.model_dump(), timeout=10.0)

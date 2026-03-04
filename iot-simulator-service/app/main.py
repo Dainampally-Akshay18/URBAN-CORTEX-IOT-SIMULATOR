@@ -1,9 +1,7 @@
 import logging
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
-
 from fastapi import FastAPI, HTTPException
-
 from app.config import settings
 from app.models import Bin, HealthResponse, MessageResponse
 from app.simulator import initialize_bins

@@ -35,11 +35,9 @@ async def _simulation_loop() -> None:
 
             state.set_bins(updated_bins)
 
-            send_tasks = [
-                send_bin_update(client, bin) for bin in updated_bins.values()
-            ]
-            await asyncio.gather(*send_tasks, return_exceptions=True)
-
+            for bin in updated_bins.values():
+                await send_bin_update(client, bin)
+                await asyncio.sleep(0.05)
             logger.info("Simulation tick completed. Bins updated: %d", len(updated_bins))
 
 
